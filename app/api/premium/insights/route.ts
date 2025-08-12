@@ -82,11 +82,10 @@ async function generatePremiumInsights(timeframe: string, includeChannels: boole
     1234, 5678, 9012, 3456, // Community leaders
   ]
 
-  // Fetch recent activity from top creators
+  // Fetch recent activity from top creators using user following feed
   const feedPromises = topCreatorFids.map(fid => 
-    neynarClient.fetchFeed({
+    neynarClient.fetchUserFollowingFeed({
       fid,
-      feedType: 'following' as any,
       limit: 10,
     }).catch(err => {
       console.warn(`Failed to fetch feed for FID ${fid}:`, err)

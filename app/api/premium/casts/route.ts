@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { NeynarAPIClient, Configuration } from '@neynar/nodejs-sdk'
-import { FeedType } from '@neynar/nodejs-sdk/build/api'
 
 // Initialize Neynar client for server-side usage
 const config = new Configuration({
@@ -51,18 +50,10 @@ export async function GET(request: NextRequest) {
 
   try {
     // Fetch premium trending content with advanced analytics
-    const premiumFids = [
-      3, 5650, 1, 2, 99, // Core accounts
-      602, 1689, 3621, 8152, // Tech leaders  
-      239, 457, 1048, 2433, // Crypto thought leaders
-      6546, 7078, 8493, 9234, // Rising creators
-    ]
-
-    const feed = await neynarClient.fetchFeed({
-      fids: premiumFids,
-      feedType: FeedType.Filter,
-      filterType: 'fids' as any,
+    const feed = await neynarClient.fetchTrendingFeed({
       limit: limit * 2, // Fetch more to filter for quality
+      timeWindow: '24h',
+      provider: 'neynar',
     })
 
     if (!feed.casts) {

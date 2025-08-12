@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { NeynarAPIClient, Configuration } from '@neynar/nodejs-sdk'
-import { FeedType } from '@neynar/nodejs-sdk/build/api'
 import { FarcasterCast } from '../types'
 
 // Initialize Neynar client
@@ -52,15 +51,11 @@ export function useFarcasterData(): FarcasterDataHook {
       setLoading(true)
       setError(null)
 
-      // Fetch trending feed using popular FIDs (this is a free endpoint)
-      // Using well-known Farcaster accounts for trending content
-      const popularFids = [3, 5650, 1, 2, 99] // dwr, vitalik, farcaster, etc.
-      
-      const feed = await neynarClient.fetchFeed({
-        fids: popularFids,
-        feedType: FeedType.Filter,
-        filterType: 'fids' as any,
+      // Fetch trending feed using the trending endpoint (this is a free endpoint)
+      const feed = await neynarClient.fetchTrendingFeed({
         limit: 20,
+        timeWindow: '24h',
+        provider: 'neynar',
       })
 
       if (feed.casts) {
@@ -158,11 +153,9 @@ export function useChannelTrending(channelId?: string) {
       setLoading(true)
       setError(null)
 
-      // Fetch channel feed using parent_url
-      const feed = await neynarClient.fetchFeed({
-        feedType: FeedType.Filter,
-        filterType: 'parent_url' as any,
-        parentUrl: `https://warpcast.com/~/channel/${channelId}`,
+      // Fetch channel feed using parent URLs
+      const feed = await neynarClient.fetchFeedByParentUrls({
+        parentUrls: [`https://warpcast.com/~/channel/${channelId}`],
         limit: 15,
       })
 
