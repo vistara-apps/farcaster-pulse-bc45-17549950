@@ -19,7 +19,7 @@ export function DropCard({ drop }: DropCardProps) {
   }
 
   return (
-    <article className="card-interactive animate-fade-in-up" role="article" aria-labelledby={`drop-${drop.collectionId}`}>
+    <article className="card-interactive animate-fade-in-up group" role="article" aria-labelledby={`drop-${drop.collectionId}`}>
       <div className="flex space-x-5">
         <div className="flex-shrink-0">
           <img

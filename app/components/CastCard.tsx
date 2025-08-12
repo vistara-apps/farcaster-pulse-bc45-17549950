@@ -32,7 +32,7 @@ export function CastCard({ cast }: CastCardProps) {
   }
 
   return (
-    <article className="card-interactive animate-fade-in-up" role="article" aria-labelledby={`cast-${cast.castId}`}>
+    <article className="card-interactive animate-fade-in-up group" role="article" aria-labelledby={`cast-${cast.castId}`}>
       <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
           <img
