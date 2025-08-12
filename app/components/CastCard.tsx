@@ -1,4 +1,3 @@
-
 'use client'
 
 import { FarcasterCast } from '../types'
@@ -33,56 +32,75 @@ export function CastCard({ cast }: CastCardProps) {
   }
 
   return (
-    <div className="card animate-fade-in">
-      <div className="flex items-start space-x-3">
-        <img
-          src={cast.authorAvatar}
-          alt={cast.authorDisplayName}
-          className="w-10 h-10 rounded-full bg-border"
-        />
+    <article className="card-interactive animate-fade-in-up" role="article" aria-labelledby={`cast-${cast.castId}`}>
+      <div className="flex items-start space-x-4">
+        <div className="flex-shrink-0">
+          <img
+            src={cast.authorAvatar}
+            alt={`${cast.authorDisplayName}'s avatar`}
+            className="w-12 h-12 rounded-full bg-border-light ring-2 ring-transparent group-hover:ring-border transition-all duration-250"
+            loading="lazy"
+          />
+        </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center space-x-2 mb-1">
-            <span className="font-semibold text-text truncate">
+          <header className="flex items-center space-x-2 mb-2">
+            <h3 
+              id={`cast-${cast.castId}`}
+              className="font-semibold text-text-primary truncate text-base"
+            >
               {cast.authorDisplayName}
-            </span>
-            <span className="text-muted text-sm">
+            </h3>
+            <span className="text-text-muted text-sm font-medium">
               @{cast.authorUsername}
             </span>
-            <span className="text-muted text-sm">
-              {formatTime(cast.timestamp)}
+            <span className="text-text-muted text-sm">
+              •
             </span>
+            <time 
+              dateTime={cast.timestamp}
+              className="text-text-muted text-sm"
+              title={new Date(cast.timestamp).toLocaleString()}
+            >
+              {formatTime(cast.timestamp)}
+            </time>
+          </header>
+          
+          <div className="mb-4">
+            <p className="text-body text-text-primary whitespace-pre-wrap leading-relaxed">
+              {cast.text}
+            </p>
           </div>
           
-          <p className="text-body text-text mb-3 whitespace-pre-wrap">
-            {cast.text}
-          </p>
-          
           {cast.embedUrl && (
-            <div className="mb-3">
+            <div className="mb-4">
               <img
                 src={cast.embedUrl}
-                alt="Cast embed"
-                className="rounded-md max-w-full h-auto"
+                alt="Cast media content"
+                className="rounded-lg max-w-full h-auto border border-border-light shadow-sm hover:shadow-md transition-shadow duration-250"
+                loading="lazy"
               />
             </div>
           )}
           
-          <div className="flex items-center space-x-4 text-sm text-muted">
-            <div className="flex items-center space-x-1">
-              <span>💬</span>
-              <span>{formatNumber(cast.repliesCount)}</span>
+          <footer className="flex items-center space-x-6 text-sm">
+            <div className="flex items-center space-x-1.5 text-text-muted hover:text-text-secondary transition-colors duration-200 group">
+              <span className="text-base group-hover:scale-110 transition-transform duration-200" role="img" aria-label="Replies">💬</span>
+              <span className="font-medium">{formatNumber(cast.repliesCount)}</span>
+              <span className="sr-only">replies</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <span>🔄</span>
-              <span>{formatNumber(cast.recastsCount)}</span>
+            <div className="flex items-center space-x-1.5 text-text-muted hover:text-text-secondary transition-colors duration-200 group">
+              <span className="text-base group-hover:scale-110 transition-transform duration-200" role="img" aria-label="Recasts">🔄</span>
+              <span className="font-medium">{formatNumber(cast.recastsCount)}</span>
+              <span className="sr-only">recasts</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <span>❤️</span>
-              <span>{formatNumber(cast.likesCount)}</span>
+            <div className="flex items-center space-x-1.5 text-text-muted hover:text-text-secondary transition-colors duration-200 group">
+              <span className="text-base group-hover:scale-110 transition-transform duration-200" role="img" aria-label="Likes">❤️</span>
+              <span className="font-medium">{formatNumber(cast.likesCount)}</span>
+              <span className="sr-only">likes</span>
             </div>
-          </div>
+          </footer>
         </div>
       </div>
-    </div>
+    </article>
   )
 }

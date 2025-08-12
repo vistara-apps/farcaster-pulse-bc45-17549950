@@ -1,4 +1,3 @@
-
 'use client'
 
 import { useMiniKit, useAddFrame, useOpenUrl, usePrimaryButton } from '@coinbase/onchainkit/minikit'
@@ -57,32 +56,34 @@ export default function FarcasterPulse() {
 
   return (
     <div className="min-h-screen bg-bg">
-      <div className="container mx-auto px-4 py-6 max-w-xl">
+      <div className="container mx-auto px-4 py-6 max-w-2xl lg:max-w-3xl">
         {/* Header */}
-        <header className="flex justify-between items-center mb-lg">
-          <div>
-            <h1 className="text-display text-text mb-1">
+        <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 space-y-4 sm:space-y-0">
+          <div className="text-center sm:text-left">
+            <h1 className="text-display-md text-text-primary mb-2 animate-fade-in-up">
               🔮 Farcaster Pulse
             </h1>
-            <p className="text-sm text-muted">
+            <p className="text-body-sm text-text-muted animate-fade-in-up stagger-1">
               Trending content, effortlessly
             </p>
           </div>
           
-          <div className="flex space-x-2">
+          <div className="flex justify-center sm:justify-end space-x-3 animate-fade-in-up stagger-2">
             {context && !context.client.added && (
               <button
                 onClick={handleAddFrame}
-                className="btn-secondary text-xs px-3 py-1"
+                className="btn-secondary text-sm px-4 py-2"
+                aria-label="Save this frame to your collection"
               >
-                SAVE
+                💾 SAVE
               </button>
             )}
             <button
               onClick={() => openUrl('https://base.org')}
-              className="text-primary text-xs font-semibold hover:text-primary/80"
+              className="btn-ghost text-sm font-semibold"
+              aria-label="Learn more about Base"
             >
-              BASE
+              🔵 BASE
             </button>
           </div>
         </header>
@@ -91,50 +92,68 @@ export default function FarcasterPulse() {
         <TabbedView activeTab={activeTab} onTabChange={setActiveTab} />
 
         {/* Content */}
-        <div className="space-y-4">
-          {activeTab === 'farcaster' && (
-            <div className="space-y-4">
-              <div className="text-center mb-lg">
-                <h2 className="text-display text-text mb-2">
-                  🔥 Trending on Farcaster
-                </h2>
-                <p className="text-sm text-muted">
-                  Most engaged content in the last 24 hours
-                </p>
-              </div>
-              {casts.map((cast) => (
-                <CastCard key={cast.castId} cast={cast} />
-              ))}
-            </div>
-          )}
+        <main className="space-y-6">
+          <div 
+            id={`tabpanel-${activeTab}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${activeTab}`}
+            className="animate-fade-in-up"
+          >
+            {activeTab === 'farcaster' && (
+              <section className="space-y-6">
+                <header className="text-center mb-8">
+                  <h2 className="text-display-sm text-text-primary mb-3">
+                    🔥 Trending on Farcaster
+                  </h2>
+                  <p className="text-body-sm text-text-muted max-w-md mx-auto">
+                    Most engaged content in the last 24 hours
+                  </p>
+                </header>
+                <div className="space-y-4">
+                  {casts.map((cast, index) => (
+                    <div key={cast.castId} className={`stagger-${Math.min(index + 1, 4)}`}>
+                      <CastCard cast={cast} />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
-          {activeTab === 'zora' && (
-            <div className="space-y-4">
-              <div className="text-center mb-lg">
-                <h2 className="text-display text-text mb-2">
-                  🎨 Viral Zora Drops
-                </h2>
-                <p className="text-sm text-muted">
-                  NFT collections gaining momentum
-                </p>
-              </div>
-              {drops.map((drop) => (
-                <DropCard key={drop.collectionId} drop={drop} />
-              ))}
-            </div>
-          )}
+            {activeTab === 'zora' && (
+              <section className="space-y-6">
+                <header className="text-center mb-8">
+                  <h2 className="text-display-sm text-text-primary mb-3">
+                    🎨 Viral Zora Drops
+                  </h2>
+                  <p className="text-body-sm text-text-muted max-w-md mx-auto">
+                    NFT collections gaining momentum
+                  </p>
+                </header>
+                <div className="space-y-4">
+                  {drops.map((drop, index) => (
+                    <div key={drop.collectionId} className={`stagger-${Math.min(index + 1, 4)}`}>
+                      <DropCard drop={drop} />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
-          {activeTab === 'insights' && <InsightsView />}
-        </div>
+            {activeTab === 'insights' && <InsightsView />}
+          </div>
+        </main>
 
         {/* Footer */}
-        <footer className="mt-xl pt-lg border-t border-border">
-          <button
-            onClick={() => openUrl('https://docs.base.org/building-with-base/miniapps')}
-            className="w-full text-center text-xs text-muted hover:text-primary transition-colors"
-          >
-            BUILT WITH MINIKIT
-          </button>
+        <footer className="mt-16 pt-8 border-t border-border-light">
+          <div className="text-center">
+            <button
+              onClick={() => openUrl('https://docs.base.org/building-with-base/miniapps')}
+              className="btn-ghost text-xs font-medium text-text-muted hover:text-primary-500 transition-colors duration-250"
+              aria-label="Learn about building with MiniKit"
+            >
+              ⚡ BUILT WITH MINIKIT
+            </button>
+          </div>
         </footer>
       </div>
     </div>
