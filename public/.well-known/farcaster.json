@@ -10,14 +10,14 @@
     "subtitle": "Built with Zara",
     "description": "Farcaster Pulse is a Base Mini App built with Zara.",
     "iconUrl": "https://0co.to/images/zara-2.png",
-    "homeUrl": "https://bc458465-4b7f-449b-a988-adc81fb556ae.vistara.dev",
-    "splashImageUrl": "https://dummyimage.com/200x200/0a0b0d/ffffff.png&text=Splash",
+    "homeUrl": "https://bc4584654b7f449ba988adc81fb556ae-rb3l-3lttu7p55-vistara.vercel.app",
+    "splashImageUrl": "https://bc4584654b7f449ba988adc81fb556ae-rb3l-3lttu7p55-vistara.vercel.app/splash.png",
     "splashBackgroundColor": "#000000",
-    "heroImageUrl": "https://dummyimage.com/1200x628/0a0b0d/ffffff.png&text=Hero",
+    "heroImageUrl": "https://bc4584654b7f449ba988adc81fb556ae-rb3l-3lttu7p55-vistara.vercel.app/image.png",
     "tagline": "Farcaster Pulse",
     "screenshotUrls": [
-      "https://dummyimage.com/1200x628/0a0b0d/ffffff.png&text=Shot1",
-      "https://dummyimage.com/1200x628/0a0b0d/ffffff.png&text=Shot2"
+      "https://bc4584654b7f449ba988adc81fb556ae-rb3l-3lttu7p55-vistara.vercel.app/screenshot.png",
+      "https://bc4584654b7f449ba988adc81fb556ae-rb3l-3lttu7p55-vistara.vercel.app/screenshot.png"
     ],
     "primaryCategory": "social",
     "tags": [
@@ -25,6 +25,6 @@
       "miniapp",
       "onchainkit"
     ],
-    "webhookUrl": "https://bc458465-4b7f-449b-a988-adc81fb556ae.vistara.dev/api/webhook"
+    "webhookUrl": "https://bc4584654b7f449ba988adc81fb556ae-rb3l-3lttu7p55-vistara.vercel.app/api/webhook"
   }
 }
