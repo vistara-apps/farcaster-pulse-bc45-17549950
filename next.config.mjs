@@ -1,6 +1,6 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   images: {
     domains: ['i.imgur.com', 'imagedelivery.net', 'zora.co'],
     remotePatterns: [

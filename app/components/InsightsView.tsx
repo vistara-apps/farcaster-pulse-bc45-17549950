@@ -1,4 +1,3 @@
-
 'use client'
 
 export function InsightsView() {
@@ -30,39 +29,48 @@ export function InsightsView() {
   ]
 
   return (
-    <div className="space-y-4">
-      <div className="text-center mb-lg">
-        <h2 className="text-display text-text mb-2">
+    <section className="space-y-6">
+      <header className="text-center mb-8">
+        <h2 className="text-display-sm text-text-primary mb-3">
           📊 Engagement Insights
         </h2>
-        <p className="text-body text-muted">
+        <p className="text-body-sm text-text-muted max-w-md mx-auto">
           Data-driven insights from Farcaster trending content
         </p>
+      </header>
+
+      <div className="space-y-4">
+        {insights.map((insight, index) => (
+          <article 
+            key={index} 
+            className="card animate-fade-in-up" 
+            style={{ animationDelay: `${index * 100}ms` }}
+          >
+            <div className="flex justify-between items-start mb-3">
+              <h3 className="font-semibold text-text-primary text-base">{insight.title}</h3>
+              <span className="text-sm text-primary-500 font-semibold bg-primary-50 px-2 py-1 rounded-md">
+                {insight.change}
+              </span>
+            </div>
+            <div className="text-xl font-bold text-text-primary mb-3">
+              {insight.value}
+            </div>
+            <p className="text-body-sm text-text-secondary leading-relaxed">
+              {insight.description}
+            </p>
+          </article>
+        ))}
       </div>
 
-      {insights.map((insight, index) => (
-        <div key={index} className="card animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
-          <div className="flex justify-between items-start mb-2">
-            <h3 className="font-semibold text-text">{insight.title}</h3>
-            <span className="text-sm text-primary font-medium">{insight.change}</span>
-          </div>
-          <div className="text-lg font-semibold text-text mb-2">
-            {insight.value}
-          </div>
-          <p className="text-sm text-muted">
-            {insight.description}
-          </p>
-        </div>
-      ))}
-
-      <div className="card bg-primary/5 border-primary/20">
+      <div className="card bg-gradient-to-br from-primary-50 to-primary-100 border-primary-500/20 shadow-lg animate-fade-in-up stagger-4">
         <div className="text-center">
-          <h3 className="font-semibold text-primary mb-2">💡 Pro Tip</h3>
-          <p className="text-sm text-text">
+          <div className="text-3xl mb-3">💡</div>
+          <h3 className="font-semibold text-primary-700 mb-3 text-lg">Pro Tip</h3>
+          <p className="text-body-sm text-text-primary leading-relaxed">
             Post tech content with visuals between 2-4 PM EST for maximum engagement!
           </p>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
